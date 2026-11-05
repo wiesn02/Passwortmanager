@@ -1,0 +1,39 @@
+WINDOWS MSVS:
+
+cl main.c userSession.c helperFunctions.c db.c crypto.c sqlite3.c /DSODIUM_STATIC /I libsodium\include libsodium\x64\static\libsodium.lib /Fe:Passwortmanager_Windows.exe
+
+cl main.c userSession.c helperFunctions.c db.c crypto.c sqlite3.c /DSODIUM_STATIC /I libsodium\include libsodium\x64\static\libsodium.lib /Fe:Passwortmanager_Windows.exe ^
+	/W4 /sdl /GS /DYNAMICBASE /D_CRT_SECURE_NO_WARNINGS /guard:cf /O2 /link /NXCOMPAT
+
+
+WINDWOS GCC:
+
+gcc main.c userSession.c helperFunctions.c db.c crypto.c sqlite3.c -DSODIUM_STATIC -I C:/msys64/ucrt64/include -L C:/msys64/ucrt64/lib -lsodium -o Passwortmanager_Windows.exe
+
+gcc main.c userSession.c helperFunctions.c db.c crypto.c sqlite3.c -DSODIUM_STATIC -I libsodium/include -L libsodium/x64_Win/static -lsodium -o Passwortmanager_Windows.exe
+
+
+
+LINUX:
+
+gcc main.c userSession.c helperFunctions.c db.c crypto.c sqlite3.c -DSODIUM_STATIC -I libsodium/include -L libsodium/x64/static -lsodium -o Passwortmanager_Linux
+
+gcc main.c userSession.c helperFunctions.c db.c crypto.c sqlite3.c -DSODIUM_STATIC -I libsodium/include -L libsodium/x64/static -lsodium -o Passwortmanager_Linux \
+	-Wall -Wextra -Wformat -Wformat-security -Werror=format-security -fstack-protector-strong -D_FORTIFY_SOURCE=2 -O2 -fPIE -pie -Wl,-z,relro -Wl,-z,now -Wl,-z,noexecstack
+
+
+
+
+
+
+
+
+
+Analyze the following C code for MISRA C:2012 compliance.
+
+Perform a thorough review and identify any violations of MISRA rules.
+
+For each violation, provide: Rule number and title, Description of the violation, Affected line(s) of code, Suggested correction
+
+If the code is fully compliant, confirm compliance.
+

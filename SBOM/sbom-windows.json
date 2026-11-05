@@ -1,0 +1,214 @@
+{
+  "$schema": "http://cyclonedx.org/schema/bom-1.6.schema.json",
+  "bomFormat": "CycloneDX",
+  "specVersion": "1.6",
+  "serialNumber": "urn:uuid:254b8f3d-2330-4780-bc7c-9d4e8a43b2d8",
+  "version": 1,
+  "metadata": 
+  {
+    "timestamp": "2026-01-04T16:45:35+01:00",
+    "tools": 
+    [
+      {
+        "vendor": "Anchore",
+        "name": "Syft",
+        "version": "1.39.0"
+      },
+      {
+        "vendor": "Microsoft",
+        "name": "C/C++ Optimizing Compiler",
+        "version": "19.38.33134"
+      }
+    ],
+    "component": 
+    {
+      "bom-ref": "af63bd4c8601b7f1",
+      "type": "file",
+      "name": ".",
+      "properties": 
+      [
+        {
+          "name": "build:timestamp",
+          "value": "2026-01-04T15:57:53+01:00"
+        },
+        {
+          "name": "targetOS",
+          "value": "Windows"
+        },
+        {
+          "name": "architecture",
+          "value": "x64"
+        },
+        {
+          "name": "compilerFlags",
+          "value": "/DSODIUM_STATIC /I libsodium\\include libsodium\\x64\\static\\libsodium.lib"
+        }
+      ]
+    }
+  },
+  "components": 
+  [
+    {
+      "bom-ref": "Passwordmanager_in_C",
+      "type": "application",
+      "name": "Passwordmanager_in_C",
+      "version": "1.0.0",
+      "properties": 
+      [
+        {
+          "name": "syft:package:foundBy",
+          "value": "pe-binary-package-cataloger"
+        },
+        {
+          "name": "syft:package:type",
+          "value": "binary"
+        },
+        {
+          "name": "syft:package:metadataType",
+          "value": "pe-binary"
+        },
+        {
+          "name": "syft:location:0:path",
+          "value": "main.exe"
+        }
+      ],
+      "hashes": 
+      [
+        {
+          "alg": "SHA-256",
+          "content": "aec197fff5e122aabd46dbc2164701c558dc6948f1ab2a1991d9862342bec2a0"
+        }
+      ]
+    },
+    {
+      "bom-ref": "lib-libsodium",
+      "type": "library",
+      "name": "libsodium",
+      "version": "1.0.20",
+      "purl": "pkg:generic/libsodium@1.0.20",
+      "scope": "required",
+      "properties": 
+      [
+        {
+          "name": "targetOS",
+          "value": "Windows"
+        },
+        {
+          "name": "architecture",
+          "value": "x64"
+        },
+        {
+          "name": "compilerFlags",
+          "value": "/DSODIUM_STATIC /I libsodium\\include libsodium\\x64\\static\\libsodium.lib"
+        },
+        {
+          "name": "filePath",
+          "value": "libsodium\\x64\\static\\libsodium.lib"
+        }
+      ],
+      "hashes": 
+      [
+        {
+          "alg": "SHA-256",
+          "content": "7f3d4de7bdbadc2257e47258b3d6ea0c629b865cecb23f9627876764710ea5ca"
+        }
+      ],
+      "licenses": 
+      [
+        {
+          "license": 
+          {
+            "id": "ISC",
+            "url": "https://libsodium.org/license"
+          }
+        }
+      ]
+    },
+    {
+      "bom-ref": "lib-sqlite",
+      "type": "library",
+      "name": "sqlite",
+      "version": "3.51.1",
+      "purl": "pkg:generic/sqlite@3.51.1"
+      "scope": "required",
+      "properties": 
+      [
+        {
+          "name": "targetOS",
+          "value": "Windows"
+        },
+        {
+          "name": "architecture",
+          "value": "x64"
+        },
+        {
+          "name": "compilerFlags",
+          "value": "/Wall /O2"
+        },
+        {
+          "name": "filePath",
+          "value": "sqlite3.c"
+        }
+      ],
+      "hashes": 
+      [
+        {
+          "alg": "SHA-256",
+          "content": "df599e8929e020409996e64d0aafbaacb4742715a37a3416431a0c1ef95598de"
+        }
+      ],
+      "licenses": 
+      [
+        {
+          "license": 
+          {
+            "id": "Public Domain",
+            "url": "https://www.sqlite.org/copyright.html"
+          }
+        }
+      ]
+    }
+  ],
+  "dependencies": 
+  [
+    {
+      "ref": "Passwordmanager_in_C",
+      "dependsOn": 
+      [
+        "lib-libsodium",
+        "lib-sqlite"
+      ]
+    }
+  ],
+  "vulnerabilities":
+  [
+    {
+      "id": "CVE-2025-15444",
+      "source": 
+      {
+        "name": "NVD",
+        "url": "https://nvd.nist.gov/vuln/detail/CVE-2025-15444"
+      },
+      "ratings": 
+      [
+        {
+          "method": "CVSSv3.1",
+          "severity": "high",
+          "score": 7.5,
+          "vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:N"
+        }
+      ],
+      "description": "libsodium versions up to and including 1.0.20 do not properly validate certain elliptic curve points, which may allow cryptographic misuse when processing untrusted input.",
+      "recommendation": "Upgrade libsodium to a version newer than 1.0.20 that includes the upstream security fix.",
+      "affects": 
+      [
+        {
+          "ref": "lib-libsodium"
+        }
+      ],
+      "published": "2025-12-30T00:00:00Z",
+      "updated": "2026-01-02T00:00:00Z"
+    }
+  ]
+}
+

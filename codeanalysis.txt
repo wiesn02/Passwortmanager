@@ -1,0 +1,29 @@
+static:
+
+	cppcheck:
+
+		cppcheck --enable=all --force --check-level=exhaustive --suppress=missingIncludeSystem $(ls *.c | grep -v sqlite3.c) > cppcheck_report.txt 2>&1 
+
+
+	flawfinder:
+
+		flawfinder $(find . -type f -name '*.c' | grep -v 'sqlite3.c') > flawfinder_report.txt
+
+
+	gcc own analyzer
+
+		gcc -fanalyzer -Wall -Wextra main.c -DSODIUM_STATIC userSession.c helperFunctions.c db.c crypto.c sqlite3.c -I libsodium/include -L libsodium/x64/static -lsodium		//CRASHES THE VM!!!!
+
+		// Use this instead, where sqlite3.c is compiled before the rest:
+
+		gcc -c sqlite3.c -I libsodium/include
+		gcc -fanalyzer -Wall -Wextra main.c userSession.c helperFunctions.c db.c crypto.c -I libsodium/include -DSODIUM_STATIC -L libsodium/x64/static -lsodium sqlite3.o
+
+
+dynamic: 
+
+	valgrind:
+
+		valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes ./Passwortmanager_Linux 2> >(tee valgrind_report.txt)
+
+
